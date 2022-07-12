@@ -10,7 +10,6 @@
   },
   "outDir": "./",
   "rootDir": "./",
-  // "include": ["./src/*.{js,jsx}"],
   "exclude": [
     "dist",
     "node_modules",
