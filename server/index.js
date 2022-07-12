@@ -12,15 +12,14 @@ const app = express();
 
 // Connect to database
 connectDB();
-// add middleware
+
 app.use(cors());
 
 app.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    graphiql:
-      process.env.NODE_ENV === 'production' ? process.env.NODE_ENV : true
+    graphiql: process.env.NODE_ENV === 'production'
   })
 );
 
