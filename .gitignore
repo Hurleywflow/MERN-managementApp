@@ -40,3 +40,4 @@ npm-debug.log*
 .npm
 /babelCLI.txt
 /webpack.config.js
+.vercel
