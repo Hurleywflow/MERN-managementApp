@@ -8,7 +8,7 @@
     "module": "esnext",
     "jsx": "react-jsx"
   },
-  "outDir": "./",
+  "outDir": "./build",
   "rootDir": "./",
   "exclude": [
     "dist",
