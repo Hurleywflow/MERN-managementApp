@@ -1,10 +1,19 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  ApolloClient,
+  ApolloProvider,
+  from,
+  HttpLink,
+  InMemoryCache
+} from '@apollo/client';
+import {onError} from '@apollo/client/link/error';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Header from './components/Header';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import Home from './pages/Home';
-import Project from './pages/Project';
 import NotFound from './pages/NotFound';
+import Project from './pages/Project';
 
+
+// make connection to server
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -12,21 +21,34 @@ const cache = new InMemoryCache({
         clients: {
           merge(existing, incoming) {
             return incoming;
-          },
+          }
         },
         projects: {
           merge(existing, incoming) {
             return incoming;
-          },
-        },
-      },
-    },
-  },
+          }
+        }
+      }
+    }
+  }
 });
+// check connection status
+const errorLink = onError(({graphqlErrors, networkError}) => {
+  if (graphqlErrors) {
+    graphqlErrors.map(({message, location, path}) => {
+      return alert(`Graphql error ${message}`);
+    });
+  }
+});
+// link up to server by uri
+const link = from([
+  errorLink,
+  new HttpLink({uri: 'http://localhost:4000/graphql'})
+]);
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  cache,
+  link: link,
+  cache
 });
 
 function App() {
