@@ -25,7 +25,7 @@ app.use(
 );
 
 // Deploy to Vercel
-
+__dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
   // server path join to the frontend
   app.use(express.static(path.join(__dirname, '/client/build')));
@@ -33,10 +33,6 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     // get index.html from the frontend to show
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-} else {
-  app.get('/', (req, res) => {
-    res.send('Server is running');
   });
 }
 
