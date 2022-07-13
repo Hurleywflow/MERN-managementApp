@@ -24,20 +24,20 @@ app.use(
   })
 );
 
-// Deploy to Vercel
-// __dirname = path.resolve();
-// if (process.env.NODE_ENV === 'production') {
-//   // server path join to the frontend
-//   app.use(express.static(path.join(__dirname, '/client/build')));
+// Deploy to Heroku
+__dirname = path.resolve();
+if (process.env.NODE_ENV === 'production') {
+  // server path join to the frontend
+  app.use(express.static(path.join(__dirname, '/client/build')));
 
-//   app.get('*', (req, res) => {
-//     // get index.html from the frontend to show
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-//   });
-// } else {
-//   app.get('/', (req, res) => {
-//     res.send('Server is running');
-//   });
-// }
+  app.get('*', (req, res) => {
+    // get index.html from the frontend to show
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.send('Server is running');
+  });
+}
 
 app.listen(port, console.log(`Server running on port ${port}`));
