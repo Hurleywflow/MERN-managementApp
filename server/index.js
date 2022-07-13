@@ -1,4 +1,5 @@
 // @ts-nocheck
+const path = require('path');
 const express = require('express');
 const colors = require('colors');
 const cors = require('cors');
@@ -24,13 +25,13 @@ app.use(
 );
 
 // Deploy to Vercel
-__dirname = path.resolve();
+
 if (process.env.NODE_ENV === 'production') {
   // server path join to the frontend
   app.use(express.static(path.join(__dirname, '/client/build')));
 
   app.get('*', (req, res) => {
-    // get index.html from the frontend to show 
+    // get index.html from the frontend to show
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 } else {
