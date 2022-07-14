@@ -24,14 +24,16 @@ app.use(
   })
 );
 
-// this is production API endpoint deployed to server
+// this is production API endpoint deployed to server with graphql
 app.use(express.static('public'));
-app.get('*', (req, res) =>
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
-);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
 
 
-// this is REST API endpoint deploy
+
+//! this is REST API endpoint deploy
 // __dirname = path.resolve();
 // if (process.env.NODE_ENV === 'production') {
 //   // server path join to the frontend
@@ -46,5 +48,9 @@ app.get('*', (req, res) =>
 //     res.send('Server is running');
 //   });
 // }
+// configure heroku deployed
+// "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+
+
 const port = process.env.PORT || 4000;
 app.listen(port, console.log(`Server running on port ${port}`));
