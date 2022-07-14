@@ -25,10 +25,10 @@ app.use(
 );
 
 // this is production API endpoint deployed to server with graphql
-app.use(express.static('dist'));
+app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
