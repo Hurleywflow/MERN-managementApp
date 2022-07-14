@@ -12,7 +12,6 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Project from './pages/Project';
 
-
 // make connection to server
 const cache = new InMemoryCache({
   typePolicies: {
@@ -43,9 +42,11 @@ const errorLink = onError(({graphqlErrors, networkError}) => {
 // link up to server by uri
 const link = from([
   errorLink,
-  new HttpLink({uri: 'http://localhost:4000/graphql'})
+  // for development
+  //! new HttpLink({ uri: 'http://localhost:4000/graphql' })
+  // for production deploy
+  new HttpLink({uri: '/graphql'})
 ]);
-
 const client = new ApolloClient({
   link: link,
   cache
