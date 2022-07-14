@@ -39,13 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": {
-    "/graphql": {
-      "target": "http://localhost:4000/graphql",
-      "changeOrigin": true,
-      "pathRewrite": {
-        "^/graphql": ""
-      }
-    }
-  }
+  "proxy": "http://localhost:4000"
 }
