@@ -24,32 +24,32 @@ app.use(
   })
 );
 
-// this is production API endpoint deployed to server with graphql
+// Graphql deployment
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
+  // public folder is used for static files after run build, change name and move out of client folder
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 
 
-//! this is REST API endpoint deploy
+//! REST API deployment
 // __dirname = path.resolve();
 // if (process.env.NODE_ENV === 'production') {
-//   // server path join to the frontend
-//   app.use(express.static(path.join(__dirname, '/client/build')));
+//   // server path join to public folder for deployment
+//   app.use(express.static(path.join(__dirname, 'public')));
 
 //   app.get('*', (req, res) => {
-//     // get index.html from the frontend to show
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//     // public folder is used for static files after run build, change name and move out of client folder
+//     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 //   });
 // } else {
 //   app.get('/', (req, res) => {
 //     res.send('Server is running');
 //   });
 // }
-// configure heroku deployed
-// "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+
 
 
 const port = process.env.PORT || 4000;
