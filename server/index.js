@@ -24,11 +24,11 @@ app.use(
 );
 
 // Graphql deployment
-app.use(express.static('build'));
+app.use(express.static('public'));
 
 app.get('*', (req, res) => {
 	// public folder is used for static files after run build, change name and move out of client folder
-	res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 //! REST API deployment
