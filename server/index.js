@@ -8,7 +8,6 @@ const {graphqlHTTP} = require('express-graphql');
 const schema = require('./schema/schema');
 const connectDB = require('./config/db');
 
-
 const app = express();
 
 // Connect to database
@@ -17,22 +16,20 @@ connectDB();
 app.use(cors());
 
 app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    graphiql: process.env.NODE_ENV === 'production'
-  })
+	'/graphql',
+	graphqlHTTP({
+		schema,
+		graphiql: process.env.NODE_ENV === 'production'
+	})
 );
 
 // Graphql deployment
-app.use(express.static('public'));
+app.use(express.static('build'));
 
 app.get('*', (req, res) => {
-  // public folder is used for static files after run build, change name and move out of client folder
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+	// public folder is used for static files after run build, change name and move out of client folder
+	res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
-
-
 
 //! REST API deployment
 // __dirname = path.resolve();
@@ -63,7 +60,6 @@ app.get('*', (req, res) => {
 // 		}
 // 	);
 // });
-
 
 const port = process.env.PORT || 4000;
 app.listen(port, console.log(`Server running on port ${port}`));
